@@ -899,6 +899,30 @@ namespace videocore { namespace simpleApi {
     free(rawData);
     
 }
+
+- (void)updatePixelBuffer:(UIImage *)image {
+    CGImageRef ref = [image CGImage];
+    
+    NSUInteger width = CGImageGetWidth(ref);
+    NSUInteger height = CGImageGetHeight(ref);
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    unsigned char *rawData = (unsigned char*) calloc(height * width * 4, sizeof(unsigned char));
+    NSUInteger bytesPerPixel = 4;
+    NSUInteger bytesPerRow = bytesPerPixel * width;
+    NSUInteger bitsPerComponent = 8;
+    CGContextRef context = CGBitmapContextCreate(rawData, width, height,
+                                                 bitsPerComponent, bytesPerRow, colorSpace,
+                                                 kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Little);
+    CGColorSpaceRelease(colorSpace);
+    
+    CGContextDrawImage(context, CGRectMake(0, 0, width, height), ref);
+    CGContextRelease(context);
+    
+    m_pixelBufferSource->pushPixelBuffer(rawData, width * height * 4);
+    
+    free(rawData);
+}
+
 - (NSString *) applicationDocumentsDirectory
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
