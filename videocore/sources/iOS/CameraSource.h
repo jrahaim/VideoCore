@@ -114,6 +114,7 @@ namespace videocore { namespace iOS {
         
         bool setContinuousExposure(bool wantsContinuous);
         
+        bool setVideoZoomFactor(float zoomFactor);
         
     public:
         /*! Used by Objective-C Capture Session */

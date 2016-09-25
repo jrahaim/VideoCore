@@ -503,5 +503,17 @@ namespace videocore { namespace iOS {
         return ret;
     }
     
+    bool
+    CameraSource::setVideoZoomFactor(float zoomFactor) {
+        AVCaptureDevice* device = (AVCaptureDevice*)m_captureDevice;
+        NSError* err = nil;
+        if([device lockForConfiguration:&err]) {
+            device.videoZoomFactor = zoomFactor;
+            return YES;
+        } else {
+            return NO;
+        }
+    }
+    
 }
 }

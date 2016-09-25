@@ -289,13 +289,12 @@ namespace videocore { namespace simpleApi {
 {
     _videoZoomFactor = videoZoomFactor;
     if(m_positionTransform) {
-        // We could use AVCaptureConnection's zoom factor, but in reality it's
-        // doing the exact same thing as this (in terms of the algorithm used),
-        // but it is not clear how CoreVideo accomplishes it.
-        // In this case this is just modifying the matrix
-        // multiplication that is already happening once per frame.
-        m_positionTransform->setSize(self.videoSize.width * videoZoomFactor,
-                                     self.videoSize.height * videoZoomFactor);
+        // Switched to Hardware zoom to better support iPhone 7 Plus
+        m_cameraSource->setVideoZoomFactor(MAX(1.0, MIN(videoZoomFactor, 6.4)));
+        
+        // Original VideoCore code:
+        //m_positionTransform->setSize(self.videoSize.width * videoZoomFactor,
+        //                             self.videoSize.height * videoZoomFactor);
     }
 }
 - (void) setAudioChannelCount:(int)channelCount
