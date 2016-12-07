@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.homepage            = "https://github.com/jgh-/VideoCore"
   s.license             = 'MIT'
   s.authors             = { "James Hurley" => "jamesghurley@gmail.com" }
-  s.source              = { :git => "https://github.com/jgh-/VideoCore.git", :tag => s.version.to_s, :submodules => true }
+  s.source              = { :git => "https://github.com/jrahaim/VideoCore.git", :tag => s.version.to_s, :submodules => true }
 
   s.requires_arc        = false
 
@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
   s.dependency          'glm'
   s.dependency          'UriParser-cpp', '~> 0.1.3'
   
-  s.xcconfig            = { "HEADER_SEARCH_PATHS" => "${PODS_ROOT}/boost" }
+  s.xcconfig            = { "HEADER_SEARCH_PATHS" => "${PODS_ROOT}/boost"}
 
   s.ios.deployment_target = '5.0'
 
