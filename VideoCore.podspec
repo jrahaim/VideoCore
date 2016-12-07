@@ -36,8 +36,7 @@ Pod::Spec.new do |s|
   s.dependency          'glm'
   s.dependency          'UriParser-cpp', '~> 0.1.3'
   
-  s.xcconfig            = { "HEADER_SEARCH_PATHS" => "${PODS_ROOT}/boost" ,
-			"LIBRARY_SEARCH_PATHS" => "$(PODS_ROOT)/glm"}
+  s.xcconfig            = { "HEADER_SEARCH_PATHS" => "${PODS_ROOT}/boost"}
 
   s.ios.deployment_target = '5.0'
 
